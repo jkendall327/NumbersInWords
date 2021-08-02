@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace NumbersInWords
 {
@@ -9,9 +10,35 @@ namespace NumbersInWords
         {
             Console.WriteLine("Numbers => words converter");
 
-            var validator = new ArgsValidator();
+            if (args.Length < 1)
+            {
+                Console.WriteLine("Usage: input each number to convert separated by spaced.");
+                Console.WriteLine("Example: 'NumbersInWords.exe 34 12 2 8' => 'thirty-four', 'twelve', 'two', 'eight'");
+                Console.ReadLine();
+                return;
+            }
 
             var input = ArgsValidator.Validate(args);
+
+            PrintAllInput(input);
+
+            // convert...
+            var output = new List<string>(0);
+
+            PrintAllOutput(output);
+
+            Console.WriteLine("Exiting...");
+            Console.ReadLine();
+        }
+
+        private static void PrintAllInput(IEnumerable<int> input)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void PrintAllOutput(IEnumerable<string> output)
+        {
+            throw new NotImplementedException();
         }
     }
 }
