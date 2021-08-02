@@ -22,8 +22,9 @@ namespace NumbersInWords
 
             PrintAllInput(input);
 
-            // convert...
-            var output = new List<string>(0);
+            var converter = new NumberNumeralConvertor();
+
+            var output = converter.ToWords(input);
 
             PrintAllOutput(output);
 
