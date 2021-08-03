@@ -22,7 +22,7 @@ namespace NumbersInWords
 
             PrintAllInput(input);
 
-            var converter = new NumberNumeralConvertor();
+            var converter = new NumberToNumeralConverter();
 
             var output = converter.ToWords(input);
 
