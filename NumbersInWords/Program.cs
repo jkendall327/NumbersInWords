@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace NumbersInWords
 {
     class Program
     {
+        private readonly static StringBuilder _sb = new();
+
         // https://codingdojo.org/kata/NumbersInWords/
         static void Main(string[] args)
         {
@@ -20,26 +23,45 @@ namespace NumbersInWords
 
             var input = ArgsValidator.Validate(args);
 
-            PrintAllInput(input);
+            Console.WriteLine(FormatInput(input));
 
             var converter = new NumberToNumeralConverter();
-
             var output = converter.ToWords(input);
 
-            PrintAllOutput(output);
+            Console.WriteLine(FormatOutput(output));
 
-            Console.WriteLine("Exiting...");
+            Console.WriteLine("Press any key to exit.");
             Console.ReadLine();
         }
 
-        private static void PrintAllInput(IEnumerable<int> input)
+        private static string FormatInput(IEnumerable<int> input)
         {
-            throw new NotImplementedException();
+            _sb.Clear();
+            _sb.Append("Recognised input: ");
+
+            foreach (var item in input)
+            {
+                _sb.Append(item);
+                _sb.Append(", ");
+            }
+
+            var result = _sb.ToString();
+            return result.Remove(result.Length - ", ".Length);
         }
 
-        private static void PrintAllOutput(IEnumerable<string> output)
+        private static string FormatOutput(IEnumerable<string> output)
         {
-            throw new NotImplementedException();
+            _sb.Clear();
+            _sb.Append("Output: ");
+
+            foreach (var item in output)
+            {
+                _sb.Append(item);
+                _sb.Append(", ");
+            }
+
+            var result = _sb.ToString().Trim();
+            return result.Remove(result.Length - ",".Length);
         }
     }
 }
