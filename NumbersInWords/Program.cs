@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace NumbersInWords
@@ -18,6 +19,13 @@ namespace NumbersInWords
             }
 
             var validatedArgs = ValidateArgs(args);
+
+            if (!validatedArgs.Any())
+            {
+                Console.WriteLine("No valid arguments found, exiting.");
+                Console.ReadLine();
+                Environment.Exit(1);
+            }
 
             Console.WriteLine(Format(validatedArgs, "Recognised input"));
 
