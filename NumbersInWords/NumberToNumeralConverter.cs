@@ -86,10 +86,10 @@ namespace NumbersInWords
 
             var tempResult = words.ToString();
 
-            // tens, e.g. 'twenty', 'fifty'
             if (tempResult != "")
                 words.Append("and ");
 
+            // tens, e.g. 'twenty', 'fifty'
             words.Append(_tens[value / 10]);
 
             // compounds, e.g. 'thirty-four'

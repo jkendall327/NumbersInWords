@@ -60,6 +60,7 @@ namespace NumbersInWords
 
             input = input.ToLowerInvariant();
 
+            // find all number-words in string, get their value
             var numbers = Regex.Matches(input, @"\w+")
                 .Where(v => _numbers.ContainsKey(v.Value))
                 .Select(v => _numbers[v.Value]);

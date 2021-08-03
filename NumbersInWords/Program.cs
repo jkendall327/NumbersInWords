@@ -17,7 +17,7 @@ namespace NumbersInWords
                 args = new[] { "34", "-11", "12341444" };
             }
 
-            var validatedArgs = ArgsValidator.Validate(args);
+            var validatedArgs = ValidateArgs(args);
 
             Console.WriteLine(Format(validatedArgs, "Recognised input"));
 
@@ -27,12 +27,29 @@ namespace NumbersInWords
 
             Console.WriteLine("Try converting a string to a number:");
 
-            var numbers = new NumeralToNumberConverter().ToNumbers(Console.ReadLine());
-
-            Console.WriteLine($"Result: {numbers}");
+            try
+            {
+                var numbers = new NumeralToNumberConverter().ToNumbers(Console.ReadLine());
+                Console.WriteLine($"Result: {numbers}");
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Invalid input.");
+            }
 
             Console.WriteLine("Press any key to exit.");
             Console.ReadLine();
+        }
+
+        public static IEnumerable<int> ValidateArgs(string[] args)
+        {
+            foreach (var item in args)
+            {
+                if (int.TryParse(item, out int result))
+                {
+                    yield return result;
+                }
+            }
         }
 
         private readonly static StringBuilder _sb = new();

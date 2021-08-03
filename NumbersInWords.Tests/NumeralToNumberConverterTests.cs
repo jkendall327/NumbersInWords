@@ -6,7 +6,7 @@ namespace NumbersInWords.Tests
 {
     public class NumeralToNumberConverterTests
     {
-        readonly NumeralToNumberConverter _sut = new();
+        private readonly NumeralToNumberConverter _sut = new();
 
         [InlineData("zero", 0)]
         [InlineData("one", 1)]
