@@ -6,8 +6,6 @@ namespace NumbersInWords
 {
     class Program
     {
-        private readonly static StringBuilder _sb = new();
-
         // https://codingdojo.org/kata/NumbersInWords/
         static void Main(string[] args)
         {
@@ -21,11 +19,11 @@ namespace NumbersInWords
 
             var validatedArgs = ArgsValidator.Validate(args);
 
-            Console.WriteLine(FormatInput(validatedArgs));
+            Console.WriteLine(Format(validatedArgs, "Recognised input"));
 
             var output = new NumberToNumeralConverter().ToWords(validatedArgs);
 
-            Console.WriteLine(FormatOutput(output));
+            Console.WriteLine(Format(output, "Output"));
 
             Console.WriteLine("Try converting a string to a number:");
 
@@ -37,25 +35,12 @@ namespace NumbersInWords
             Console.ReadLine();
         }
 
-        private static string FormatInput(IEnumerable<int> input)
+        private readonly static StringBuilder _sb = new();
+
+        private static string Format<T>(IEnumerable<T> output, string message)
         {
             _sb.Clear();
-            _sb.Append("Recognised input: ");
-
-            foreach (var item in input)
-            {
-                _sb.Append(item);
-                _sb.Append(", ");
-            }
-
-            var result = _sb.ToString();
-            return result.Remove(result.Length - ", ".Length);
-        }
-
-        private static string FormatOutput(IEnumerable<string> output)
-        {
-            _sb.Clear();
-            _sb.Append("Output: ");
+            _sb.Append($"{message}: " + Environment.NewLine);
 
             foreach (var item in output)
             {
@@ -64,7 +49,7 @@ namespace NumbersInWords
                 _sb.Append(Environment.NewLine);
             }
 
-            var result = _sb.ToString().Trim();
+            var result = _sb.ToString().TrimEnd();
             return result.Remove(result.Length - ",".Length);
         }
     }
