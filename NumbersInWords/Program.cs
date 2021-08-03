@@ -15,20 +15,23 @@ namespace NumbersInWords
 
             if (args.Length < 1)
             {
-                Console.WriteLine("Usage: input each number to convert separated by spaced.");
-                Console.WriteLine("Example: 'NumbersInWords.exe 34 12 2 8' => 'thirty-four', 'twelve', 'two', 'eight'");
-                Console.ReadLine();
-                return;
+                Console.WriteLine("No command-line arguments found. Using example data.");
+                args = new[] { "34", "-11", "12341444" };
             }
 
-            var input = ArgsValidator.Validate(args);
+            var validatedArgs = ArgsValidator.Validate(args);
 
-            Console.WriteLine(FormatInput(input));
+            Console.WriteLine(FormatInput(validatedArgs));
 
-            var converter = new NumberToNumeralConverter();
-            var output = converter.ToWords(input);
+            var output = new NumberToNumeralConverter().ToWords(validatedArgs);
 
             Console.WriteLine(FormatOutput(output));
+
+            Console.WriteLine("Try converting a string to a number:");
+
+            var numbers = new NumeralToNumberConverter().ToNumbers(Console.ReadLine());
+
+            Console.WriteLine($"Result: {numbers}");
 
             Console.WriteLine("Press any key to exit.");
             Console.ReadLine();
@@ -58,6 +61,7 @@ namespace NumbersInWords
             {
                 _sb.Append(item);
                 _sb.Append(", ");
+                _sb.Append(Environment.NewLine);
             }
 
             var result = _sb.ToString().Trim();
