@@ -53,11 +53,21 @@ namespace NumbersInWords
         /// <returns>The converted value.</returns>
         public int ToNumbers(string input)
         {
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                throw new ArgumentException("Invalid input.", nameof(input));
+            }
+
             input = input.ToLowerInvariant();
 
             var numbers = Regex.Matches(input, @"\w+")
                 .Where(v => _numbers.ContainsKey(v.Value))
                 .Select(v => _numbers[v.Value]);
+
+            if (!numbers.Any())
+            {
+                throw new ArgumentException("No valid number-words detected.", nameof(input));
+            }
 
             bool isNegative = input.StartsWith("minus", StringComparison.InvariantCultureIgnoreCase);
 
