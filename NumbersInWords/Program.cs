@@ -49,7 +49,7 @@ namespace NumbersInWords
             Console.ReadLine();
         }
 
-        public static IEnumerable<int> ValidateArgs(string[] args)
+        private static IEnumerable<int> ValidateArgs(string[] args)
         {
             foreach (var item in args)
             {
